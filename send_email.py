@@ -1,22 +1,29 @@
+# Import smtplib module
 import smtplib
 
-EMAIL_ADDRESS = 'dudeindaegu@gmail.com'
-EMAIL_PASSWORD = 'Tkdgkr92!'
+EMAIL_ID = 'PUT YOUR EMAIL ADDRESS'
 
-# if the optional host and port parameters are given,
-# the SMTP connect() method is called with those parameters
-# during initialization.
-# So here we are connecting to 'smtp.gmail.com', with port 587
+# If you created an app password, put 16 digits generated password
+# that you were given to 'EMAIL_PW'
+EMAIL_PW = 'PUT YOUR PASSWORD'
+
+
+# Opening the connection
 with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-    smtp.ehlo()
+    # Put SMTP connection in TLS mode
     smtp.starttls()
+    
+    # Identify yourself since you've put connection in TLS mode
     smtp.ehlo()
 
-    smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+    # Login with your ID and PASSWORD
+    smtp.login(EMAIL_ID, EMAIL_PW)
 
-    subject = 'Hey this is a test EMail!'
-    body = 'Is it working well?'
+    subject = "This is a test"
+    body = "This is working? YAY!"
 
-    message = f'Subject: {subject}\n\n{body}'
+    # If you don't know this form of string, look up 'f string'
+    msg = f'Subject: {subject}\n\n{body}'
 
-    smtp.sendmail(EMAIL_ADDRESS, 'dudeindaegu@gmail.com', message)
+    # smtp.sendmail(SENDER, RECEIVER, MESSAGE)
+    smtp.sendmail(EMAIL_ID, EMAIL_ID, msg)
